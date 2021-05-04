@@ -48,8 +48,8 @@ app.get('/create/:domain', (req, res) => {
             }
 
             // absolute path to the file
-            let p = path.join(__dirname, img);
-            console.log("absolute path to the file:" + p);
+            // let p = path.join(__dirname, img);
+            // console.log("absolute path to the file:" + p);
 
             return res.status(200).json({
                 success: true,
@@ -68,7 +68,7 @@ app.get('/create/:domain', (req, res) => {
 
 // http://localhost:3000/png/softreck.com
 // http://webscreen.pl:3000/png/softreck.com
-
+/*
 app.get('/png/:domain', async (req, res) => {
 
     var img =  'png/' + req.params.domain + '.png';
@@ -83,7 +83,7 @@ app.get('/png/:domain', async (req, res) => {
     // res.send('Hello World!')
 })
 
-
+*/
 
 async function fetch(domain, callback) {
     try {
