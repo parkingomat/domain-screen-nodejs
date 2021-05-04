@@ -4,11 +4,12 @@
   "description": "webscreenshoot",
   "main": "server.js",
   "dependencies": {
-  },
-  "devDependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "puppeteer": "^9.1.0"
+  },
+  "devDependencies": {
+
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
