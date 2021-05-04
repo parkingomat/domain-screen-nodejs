@@ -17,6 +17,7 @@ const app = express();
     console.log("Puppeteer Browser Initiated");
 })();
 
+
 // Middleware
 
 app.use(cors());
@@ -44,7 +45,7 @@ app.get('/create/:domain', (req, res) => {
                 success: true,
                 path: img,
                 local: 'http://localhost:3000/' + img,
-                url: 'https://webportfolio.pl/' + img,
+                url: 'https://webscreen.pl/' + img,
             });
         });
     } catch (err) {
@@ -55,7 +56,7 @@ app.get('/create/:domain', (req, res) => {
     }
 });
 
-// Student Fetcher Function
+
 
 async function fetch(domain, callback) {
     try {
