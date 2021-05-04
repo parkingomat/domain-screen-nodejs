@@ -49,9 +49,7 @@ app.get('/create/:domain', (req, res) => {
 
             // absolute path to the file
             let p = path.join(__dirname, img);
-
-            // send a png file
-            res.sendFile(p);
+            console.log("absolute path to the file:" + p);
 
             return res.status(200).json({
                 success: true,
@@ -77,6 +75,8 @@ app.get('/png/:domain', async (req, res) => {
 
     // absolute path to the file
     let p = path.join(__dirname, img);
+
+    console.log("absolute path to the file:" + p);
 
     // send a png file
     res.sendFile(p);
