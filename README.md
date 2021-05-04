@@ -29,6 +29,8 @@ Install the latest version of Node Js
 
 To use Puppeteer in your project, run:
 
+
+    npm i cors
     npm i path
     npm i express
     npm i puppeteer
@@ -54,5 +56,5 @@ http://domain-screen-nodejs.parkingomat.pl/create/softreck.com
 http://domain-screen-nodejs.parkingomat.pl/read/softreck.com
 
 
-http://webportfolio.pl/create/softreck.com
+https://webportfolio.pl/create/softreck.com
 http://webportfolio.pl/read/softreck.com
