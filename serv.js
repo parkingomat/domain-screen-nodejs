@@ -43,7 +43,7 @@ app.get('/create/:domain', (req, res) => {
             return res.status(200).json({
                 success: true,
                 path: img,
-                local: 'http://localhost:3000' + img,
+                local: 'http://localhost:3000/' + img,
                 url: 'https://webportfolio.pl/' + img,
             });
         });
