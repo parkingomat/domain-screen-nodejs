@@ -7,6 +7,7 @@ http://domain-screen-nodejs.parkingomat.pl/
 
 
 ### github
+https://github.com/parkingomat/domain-screen-nodejs.git
 
     git clone https://github.com/parkingomat/domain-screen-nodejs.git
 
@@ -46,5 +47,12 @@ After the Nodejs installation, we need to create a new project folder and instal
 
 ## URL
 
+http://localhost:3000/create/softreck.com
+http://localhost:3000/read/softreck.com
+
 http://domain-screen-nodejs.parkingomat.pl/create/softreck.com
 http://domain-screen-nodejs.parkingomat.pl/read/softreck.com
+
+
+http://webportfolio.pl/create/softreck.com
+http://webportfolio.pl/read/softreck.com
