@@ -31,7 +31,7 @@ app.get('/create/:domain', (req, res) => {
 
         var domain = req.params.domain;
 
-        fetchStudentData(domain, (err, img) => {
+        fetch(domain, (err, img) => {
             if (err) {
                 console.error(err);
                 return res.status(500).json({
@@ -43,6 +43,7 @@ app.get('/create/:domain', (req, res) => {
             return res.status(200).json({
                 success: true,
                 path: img,
+                local: 'http://localhost:3000' + img,
                 url: 'https://webportfolio.pl/' + img,
             });
         });
@@ -56,7 +57,7 @@ app.get('/create/:domain', (req, res) => {
 
 // Student Fetcher Function
 
-async function fetchStudentData(domain, callback) {
+async function fetch(domain, callback) {
     try {
         const page = await browser.newPage();
 
