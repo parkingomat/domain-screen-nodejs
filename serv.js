@@ -2,6 +2,7 @@
 const cors = require("cors");
 const express = require("express");
 const puppeteer = require("puppeteer");
+const path = require('path');
 
 // Globals
 
@@ -27,6 +28,7 @@ const app = express();
 app.use(cors());
 
 // REST Endpoint
+// http://webscreen.pl:3000/create/softreck.com
 
 app.get('/create/:domain', (req, res) => {
     try {
@@ -45,6 +47,12 @@ app.get('/create/:domain', (req, res) => {
                 });
             }
 
+            // absolute path to the file
+            let p = path.join(__dirname, img);
+
+            // send a png file
+            res.sendFile(p);
+
             return res.status(200).json({
                 success: true,
                 path: img,
@@ -60,6 +68,21 @@ app.get('/create/:domain', (req, res) => {
     }
 });
 
+// http://localhost:3000/png/softreck.com
+// http://webscreen.pl:3000/png/softreck.com
+
+app.get('/png/:domain', async (req, res) => {
+
+    var img =  'png/' + req.params.domain + '.png';
+
+    // absolute path to the file
+    let p = path.join(__dirname, img);
+
+    // send a png file
+    res.sendFile(p);
+    // res.send('Hello World!')
+})
+
 
 
 async function fetch(domain, callback) {
@@ -74,7 +97,7 @@ async function fetch(domain, callback) {
                 return callback(e);
             });
 
-        var img = 'img/' + domain + '.png';
+        var img = 'png/' + domain + '.png';
 
         await page.screenshot({path: img})
 
