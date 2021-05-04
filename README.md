@@ -5,27 +5,45 @@ Nodejs version for screen shooting
 
 http://domain-screen-nodejs.parkingomat.pl/
 
+### GIT Install
+
+check if exist
+
+    which git
+
+Prepare linux
+    
+    sudo apt update
+
+Install git
+
+    sudo apt install -y git
+
+check version
+
+    git --version
+
 
 ### github
 https://github.com/parkingomat/domain-screen-nodejs.git
 
     git clone https://github.com/parkingomat/domain-screen-nodejs.git
+    cd domain-screen-nodejs
 
 https://github.com/parkingomat/domain-screen-nodejs
 
-## Install
+## NODEJS Install 
 
 Install the latest version of Node Js
-
-    sudo apt-get update
-    sudo apt-get install nodejs
-    sudo apt-get install npm
+ 
+    sudo apt install -y nodejs
+    sudo apt install -y npm
 
 ## start project
 
     npm install
 
-## Install Puppeteer
+## Install Packages
 
 To use Puppeteer in your project, run:
 
@@ -40,9 +58,16 @@ To use Puppeteer in your project, run:
 
 After the Nodejs installation, we need to create a new project folder and install Puppeteer, which comes with a recent version of Chromium. We can run the following command to install Puppeteer.
 
-    npm install --save puppeteer 
+    npm install --save puppeteer
+
+Install browser
+
+    apt install -y chromium-browser
 
 ## Start app
+
+    node serv.js
+
 
     node app.js
 
@@ -52,9 +77,7 @@ After the Nodejs installation, we need to create a new project folder and instal
 http://localhost:3000/create/softreck.com
 http://localhost:3000/read/softreck.com
 
-http://domain-screen-nodejs.parkingomat.pl/create/softreck.com
-http://domain-screen-nodejs.parkingomat.pl/read/softreck.com
+https://webscreen.pl:3000/create/softreck.com
 
-
-https://webportfolio.pl/create/softreck.com
-http://webportfolio.pl/read/softreck.com
+https://webscreen.pl/create/softreck.com
+https://webscreen.plread/softreck.com

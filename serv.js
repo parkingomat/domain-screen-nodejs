@@ -13,7 +13,11 @@ var browser;
 const app = express();
 
 (async () => {
-    browser = await puppeteer.launch();
+    browser = await puppeteer.launch({
+        executablePath: '/usr/bin/chromium-browser',
+        args: ["--no-sandbox", "--disabled-setupid-sandbox"],
+    });
+    console.log(await browser.version());
     console.log("Puppeteer Browser Initiated");
 })();
 
