@@ -20,6 +20,9 @@ Install the latest version of Node Js
     sudo apt-get install nodejs
     sudo apt-get install npm
 
+## start project
+
+    npm install
 
 ## Install Puppeteer
 

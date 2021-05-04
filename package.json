@@ -1,0 +1,26 @@
+{
+  "name": "domain-screen-nodejs",
+  "version": "1.0.0",
+  "description": "webscreenshoot",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "path": "^0.12.7",
+    "puppeteer": "^9.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parkingomat/domain-screen-nodejs.git"
+  },
+  "author": "Tom Sapletta <tom@sapletta.com> (https://tom.sapletta.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/parkingomat/domain-screen-nodejs/issues"
+  },
+  "homepage": "https://github.com/parkingomat/domain-screen-nodejs#readme"
+}
