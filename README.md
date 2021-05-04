@@ -39,3 +39,9 @@ After the Nodejs installation, we need to create a new project folder and instal
 ## Start app
 
     node app.js
+
+
+## URL
+
+http://domain-screen-nodejs.parkingomat.pl/create/softreck.com
+http://domain-screen-nodejs.parkingomat.pl/read/softreck.com
