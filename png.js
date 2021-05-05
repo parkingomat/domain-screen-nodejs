@@ -176,10 +176,10 @@ async function capture(img, url, res) {
 
     ///////////
     const browser = await puppeteer.launch({
-        headless: true,
-        timeout: 0,
-        ignoreHTTPSErrors: true,
-        ignoreDefaultArgs: ['--disable-extensions'],
+        // headless: true,
+        // timeout: 0,
+        // ignoreHTTPSErrors: true,
+        // ignoreDefaultArgs: ['--disable-extensions'],
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
