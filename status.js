@@ -3,15 +3,15 @@ var https = require('https');
 
 // test("https://stackoverfdlow.com/");
 
-module.exports = function status(url, callback) {
+module.exports = function status(url, success, error) {
     https
         .get(url, function(res) {
-            console.log(url, res.statusCode);
-            return callback(res.statusCode === 200);
+            // console.log(url, res.statusCode);
+            return success(res.statusCode);
         })
         .on("error", function(e) {
-            console.log(url, e.code);
-            return callback(false);
+            // console.log(url, e.code);
+            return error(e.code);
         });
 }
 

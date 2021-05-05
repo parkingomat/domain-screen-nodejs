@@ -77,7 +77,7 @@ app.get('/url/:url', async (req, res) => {
 
     // Buffer.from("SGVsbG8gV29ybGQ=", 'base64').toString('ascii')
     const urld = Buffer.from(req.params.url).toString('base64');
-    console.log(urld);
+    // console.log(urld);
 
     var img = 'png/' + urld + '.png';
 
@@ -87,8 +87,7 @@ app.get('/url/:url', async (req, res) => {
     try {
 
         status(url, function (check) {
-            console.log(check); //true
-            if (check) {
+                console.log(check); //true
                 // download(img, url, res) ||
                 // absolute path to the file
                 let p = path.join(__dirname, img);
@@ -105,12 +104,15 @@ app.get('/url/:url', async (req, res) => {
                     return true;
                 }
 
-            } else {
+            },
+            function (check) {
+                console.log(check); //true
+
                 img = 'img/not.png';
                 download(img, url, res);
                 return false;
             }
-        })
+        );
 
     } catch (err) {
         console.log(":::err.message:");
@@ -137,8 +139,7 @@ app.get('/png/:domain', async (req, res) => {
     try {
 
         status(url, function (check) {
-            console.log(check); //true
-            if (check) {
+                console.log(check); //true
                 // download(img, url, res) ||
                 // absolute path to the file
                 let p = path.join(__dirname, img);
@@ -154,13 +155,15 @@ app.get('/png/:domain', async (req, res) => {
                     capture(img, url, res)
                     return true;
                 }
+            },
+            function (check) {
+                console.log(check); //true
 
-            } else {
                 img = 'img/not.png';
                 download(img, url, res);
                 return false;
             }
-        })
+        );
 
 
     } catch (err) {
@@ -172,6 +175,12 @@ app.get('/png/:domain', async (req, res) => {
     }
 })
 
+/**
+ * @param img
+ * @param url
+ * @param res
+ * @returns {boolean}
+ */
 function download(img, url, res) {
 
     // absolute path to the file
@@ -188,7 +197,13 @@ function download(img, url, res) {
     return false;
 }
 
-
+/**
+ *
+ * @param img
+ * @param url
+ * @param res
+ * @returns {Promise<boolean>}
+ */
 async function capture(img, url, res) {
 // if(capture(img, url, res)){
     console.log(`HTTP: ${url}`);
@@ -247,9 +262,6 @@ app.get("/remove", async (req, resp) => {
     resp.send({"status": true});
     // resp.send(`Request rcvd: ${url}`);
 });
-
-
-
 
 
 app.listen(port, () => {
