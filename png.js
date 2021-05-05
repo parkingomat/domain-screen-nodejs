@@ -62,6 +62,11 @@ app.get("/http/:domain", async (req, resp) => {
     // resp.send(`Request rcvd: ${url}`);
 });
 
+process.on('unhandledRejection', function(err) {
+    console.log('unhandledRejection:::');
+    console.log(err);
+    // sendInTheCalvary(err);
+});
 
 // http://localhost:3000/png/softreck.com
 // http://localhost:3000/png/softreck.pl
@@ -137,6 +142,7 @@ function download(img, url, res) {
     }
     return false;
 }
+
 
 async function capture(img, url, res) {
 // if(capture(img, url, res)){
