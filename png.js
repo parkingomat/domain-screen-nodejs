@@ -34,7 +34,7 @@ app.get('/url/:url', async (req, res) => {
     const urld = Buffer.from(req.params.url).toString('base64');
     // console.log(urld);
 
-    var img = path.join('png',  urld + '.png');
+    var img = path.join('png', urld + '.png');
 
     // var url = decodeURI(req.params.url);
     var url = req.params.url;
@@ -61,6 +61,11 @@ app.get('/url/:url', async (req, res) => {
             },
             function (check) {
                 console.log(check); //true
+                if(check == 'ERR_TLS_CERT_ALTNAME_INVALID') {
+                    capture(img, url, res)
+                    return true;
+                }
+
                 download('', url, res);
                 return false;
             }
@@ -90,7 +95,7 @@ app.get('/png/:domain', async (req, res) => {
     }
 
     var domain = req.params.domain;
-    var img = path.join('png',  domain + '.png');
+    var img = path.join('png', domain + '.png');
     // var p = path.join(__dirname, 'img', 'not.png');
 
     var url = `https://${domain}`
@@ -171,29 +176,66 @@ async function capture(img, url, res) {
 
     ///////////
     const browser = await puppeteer.launch({
-        headless: false,
-        ignoreDefaultArgs: ['--disable-extensions'],
-        args: [
-            '--no-sandbox',
-            '--disable-setuid-sandbox',
-            '--ignore-certificate-errors'
-        ]
+        // headless: true,
+        // timeout: 0,
+        ignoreHTTPSErrors: true,
+        // ignoreDefaultArgs: ['--disable-extensions'],
+        // args: [
+        //     '--no-sandbox',
+        //     '--disable-setuid-sandbox',
+        //     '--ignore-certificate-errors',
+        //     '--disable-gpu',
+        // ]
     });
 
-    try {
-        const webPage = await browser.newPage();
+    // try {
+    const webPage = await browser.newPage();
 
-        await webPage.goto(url, {
-            waitUntil: "networkidle0"
-        });
+    const response = await webPage.goto(url, {
+        // waitUntil: "networkidle0"
+    });
 
-        const png = await webPage.screenshot({path: img});
-    } catch (err) {
-        console.log(err.toString());
-        download('', url, res);
+    const chain = response.request().redirectChain();
+    // console.log(chain); // Return 1
+
+    // console.log("chain " + chain.length); // Return 1
+    if (chain.length > 0) {
+        // url = chain[0].response().url();
+        url = chain[0].response().headers().location;
+        console.log("url redirected: ", url); // Return string 'http://example.com'
+
+        // url = chain[1].url();
+        // console.log("url", url); // Return string 'http://example.com'
+
+        let p = path.join(__dirname, img);
+        // console.log("p  redirected: ", p); // Return string 'http://example.com'
+        // let p = img;
+
+        const fs = require("fs"); // Or `import fs from "fs";` with ESM
+        if (fs.existsSync(p)) {
+            // send a png file
+            res.sendFile(p);
+            console.log(`HDD YES: ${url}`);
+            return true;
+        } else {
+            capture(img, url, res)
+            return true;
+        }
+
+        // capture(img, url, res);
         await browser.close();
-        return false;
+        return true;
+
     }
+
+    const png = await webPage.screenshot({path: img});
+
+    // } catch (err) {
+    //     console.log(err.toString());
+    //     download('', url, res);
+    //     await browser.close();
+    //     return false;
+    // }
     await browser.close();
     ///////////
 
