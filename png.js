@@ -18,11 +18,10 @@ const app = express();
 app.use(cors());
 
 
-
 //localhost:3000/png/softreck.com
 // http://webscreen.pl:3000/png/softreck.com
 
-app.get("/png/:domain", async(req, resp) => {
+app.get("/png/:domain", async (req, resp) => {
 
     if (!req.params.domain) {
         throw new Error("domain is required");
@@ -37,6 +36,7 @@ app.get("/png/:domain", async(req, resp) => {
     const browser = await puppeteer.launch({
         headless: true,
         ignoreDefaultArgs: ['--disable-extensions'],
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
     });
 
     const webPage = await browser.newPage();
