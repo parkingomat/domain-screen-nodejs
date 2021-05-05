@@ -67,6 +67,7 @@ process.on('unhandledRejection', function (err) {
     console.log(':::unhandledRejection:');
     console.log(err);
     // sendInTheCalvary(err);
+
 });
 
 app.get('/url/:url', async (req, res) => {
@@ -88,11 +89,10 @@ app.get('/url/:url', async (req, res) => {
 
         status(url, function (check) {
                 console.log(check); //true
-                // download(img, url, res) ||
+
                 // absolute path to the file
                 let p = path.join(__dirname, img);
-
-                const fs = require("fs"); // Or `import fs from "fs";` with ESM
+                const fs = require("fs");
                 if (fs.existsSync(p)) {
                     console.log(`HDD: ${url}`);
 
@@ -114,6 +114,9 @@ app.get('/url/:url', async (req, res) => {
             }
         );
 
+        img = 'img/not.png';
+        download(img, url, res);
+
     } catch (err) {
         console.log(":::err.message:");
         console.log(err.message);
@@ -121,6 +124,9 @@ app.get('/url/:url', async (req, res) => {
         download(img, url, res);
         return false;
     }
+
+    img = 'img/not.png';
+    download(img, url, res);
 })
 
 // http://localhost:3000/png/softreck.com
