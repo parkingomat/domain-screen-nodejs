@@ -88,8 +88,12 @@ https://webscreen.pl/png/softreck.com
 http://webscreen.pl:3000/png/softreck.com
 https://webscreen.plread/softreck.com
 
+## BROWSER
 
-DOMAIN
+    apt-get install chromium-browser
+
+## DOMAIN
+
 sudo hostnamectl set-hostname webscreen
 
 hostnamectl set-hostname webscreen
