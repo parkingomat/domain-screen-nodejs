@@ -82,11 +82,27 @@ app.get('/png/:domain', async (req, res) => {
     status(url, function (check) {
         console.log(check); //true
         if (check) {
-            download(img, url, res) || capture(img, url, res)
+            // download(img, url, res) ||
+            // absolute path to the file
+            let p = path.join(__dirname, img);
+
+            const fs = require("fs"); // Or `import fs from "fs";` with ESM
+            if (fs.existsSync(p)) {
+                console.log(`HDD: ${url}`);
+
+                // send a png file
+                res.sendFile(p);
+                return true;
+            } else {
+                capture(img, url, res)
+                return true;
+            }
+
         } else {
             domain = 'not'
             img = 'img/' + domain + '.png';
-            download(img, url, res)
+            download(img, url, res);
+            return true;
         }
     })
 
