@@ -176,15 +176,15 @@ async function capture(img, url, res) {
 
     ///////////
     const browser = await puppeteer.launch({
-        // headless: true,
-        // timeout: 0,
-        // ignoreHTTPSErrors: true,
+        headless: true,
+        timeout: 0,
+        ignoreHTTPSErrors: true,
         // ignoreDefaultArgs: ['--disable-extensions'],
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
-        //     '--ignore-certificate-errors',
-        //     '--disable-gpu',
+            '--ignore-certificate-errors',
+            '--disable-gpu',
         ]
     });
 
@@ -216,10 +216,8 @@ async function capture(img, url, res) {
             // send a png file
             res.sendFile(p);
             console.log(`HDD YES: ${url}`);
-            return true;
         } else {
             capture(img, url, res)
-            return true;
         }
 
         // capture(img, url, res);
