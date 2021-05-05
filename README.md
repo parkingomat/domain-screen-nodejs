@@ -4,6 +4,8 @@ Nodejs version for screen shooting
 ### domain
 
 http://domain-screen-nodejs.parkingomat.pl/
+http://webscreen.pl:3000/png/softreck.com
+
 
 ### GIT Install
 
@@ -52,6 +54,7 @@ To use Puppeteer in your project, run:
     npm i path
     npm i express
     npm i puppeteer
+    npm i path
 
     npm i puppeteer-core
 

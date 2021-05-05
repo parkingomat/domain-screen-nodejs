@@ -9,6 +9,7 @@ const path = require('path');
 // http://localhost:3000/?name=softreck.com
 // http://localhost:3000/softreck.com
 // http://localhost:3000/create/softreck.com
+// http://webscreen.pl:3000/png/softreck.com
 
 app.get('/create/:domain', async (req, res) => {
 
@@ -44,7 +45,7 @@ app.get('/create/:domain', async (req, res) => {
 
 app.get('/read/:domain', async (req, res) => {
 
-    var img = 'img/' + req.params.domain + '.png';
+    var img = 'png/' + req.params.domain + '.png';
 
     // absolute path to the file
     let p = path.join(__dirname, img);
