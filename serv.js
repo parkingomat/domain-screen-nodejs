@@ -5,6 +5,7 @@ const puppeteer = require("puppeteer");
 const path = require('path');
 
 // Globals
+// TODO: sqlite
 
 const port = 3000;
 var browser;
@@ -29,6 +30,7 @@ app.use(cors());
 
 // REST Endpoint
 // http://webscreen.pl:3000/create/softreck.com
+//localhost:3000/create/softreck.com
 
 app.get('/create/:domain', (req, res) => {
     try {

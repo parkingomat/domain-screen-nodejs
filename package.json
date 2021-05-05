@@ -6,11 +6,9 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "puppeteer": "^9.1.0"
+    "puppeteer": "^9.1.1"
   },
-  "devDependencies": {
-
-  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node serv.js"

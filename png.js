@@ -5,10 +5,9 @@ const puppeteer = require("puppeteer");
 const app = express();
 const port = 3000;
 
-//localhost:3000/pdf/softreck.com
+//localhost:3000/png/softreck.com
 
-
-app.get("/pdf/:domain", async(req, resp) => {
+app.get("/png/:domain", async(req, resp) => {
 
     if (!req.params.domain) {
         throw new Error("domain is required");
@@ -30,20 +29,15 @@ app.get("/pdf/:domain", async(req, resp) => {
         waitUntil: "networkidle0"
     });
 
-    const pdf = await webPage.pdf({
-        printBackground: true,
-        format: "Letter",
-        margin: {
-            top: "0px",
-            bottom: "40px",
-            left: "20px",
-            right: "20px"
-        }
-    });
+
+    var img = 'png/' + domain + '.png';
+
+    const png = await webPage.screenshot({path: img});
 
     await browser.close();
-    resp.contentType("application/pdf");
-    resp.send(pdf);
+
+    resp.contentType("image/png");
+    resp.send(png);
     // resp.send(`Request rcvd: ${url}`);
 });
 
