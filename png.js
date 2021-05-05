@@ -21,6 +21,7 @@ app.use(cors());
 
 //localhost:3000/png/softreck.com
 // http://webscreen.pl:3000/png/softreck.com
+// http://localhost:3000/png/www.phpfunc.com
 
 app.get("/http/:domain", async (req, resp) => {
 
@@ -62,28 +63,26 @@ app.get("/http/:domain", async (req, resp) => {
     // resp.send(`Request rcvd: ${url}`);
 });
 
-process.on('unhandledRejection', function(err) {
+process.on('unhandledRejection', function (err) {
     console.log('unhandledRejection:::');
     console.log(err);
     // sendInTheCalvary(err);
 });
 
-// http://localhost:3000/png/softreck.com
-// http://localhost:3000/png/softreck.pl
+app.get('/url/:url', async (req, res) => {
 
-app.get('/png/:domain', async (req, res) => {
-
-
-    if (!req.params.domain) {
+    if (!req.params.url) {
         throw new Error("domain is required");
     }
 
-    var domain = req.params.domain;
-    var img = 'png/' + domain + '.png';
-    var url = `https://${domain}`
+    // Buffer.from("SGVsbG8gV29ybGQ=", 'base64').toString('ascii')
+    const urld = Buffer.from(req.params.url).toString('base64');
+    console.log(urld);
 
-    // status(url);
+    var img = 'png/' + urld + '.png';
 
+    // var url = decodeURI(req.params.url);
+    var url = req.params.url;
 
     try {
 
@@ -107,24 +106,70 @@ app.get('/png/:domain', async (req, res) => {
                 }
 
             } else {
-                domain = 'not'
-                img = 'img/' + domain + '.png';
+                img = 'img/not.png';
                 download(img, url, res);
-                return true;
+                return false;
+            }
+        })
+
+    } catch (err) {
+        console.log("err.message::::");
+        console.log(err.message);
+        img = 'img/not.png';
+        download(img, url, res);
+        return false;
+    }
+})
+
+// http://localhost:3000/png/softreck.com
+// http://localhost:3000/png/softreck.pl
+
+app.get('/png/:domain', async (req, res) => {
+
+    if (!req.params.domain) {
+        throw new Error("domain is required");
+    }
+
+    var domain = req.params.domain;
+    var img = 'png/' + domain + '.png';
+    var url = `https://${domain}`
+
+    try {
+
+        status(url, function (check) {
+            console.log(check); //true
+            if (check) {
+                // download(img, url, res) ||
+                // absolute path to the file
+                let p = path.join(__dirname, img);
+
+                const fs = require("fs"); // Or `import fs from "fs";` with ESM
+                if (fs.existsSync(p)) {
+                    console.log(`HDD: ${url}`);
+
+                    // send a png file
+                    res.sendFile(p);
+                    return true;
+                } else {
+                    capture(img, url, res)
+                    return true;
+                }
+
+            } else {
+                img = 'img/not.png';
+                download(img, url, res);
+                return false;
             }
         })
 
 
     } catch (err) {
-
+        console.log("err.message::::");
         console.log(err.message);
-        domain = 'not'
-        img = 'img/' + domain + '.png';
+        img = 'img/not.png';
         download(img, url, res);
-        return true;
+        return false;
     }
-
-
 })
 
 function download(img, url, res) {
@@ -176,12 +221,35 @@ async function capture(img, url, res) {
 app.get("/remove", async (req, resp) => {
 
     console.log('remove cache');
-    const fs = require("fs"); // Or `import fs from "fs";` with ESM
+    const directory = 'png';
 
-    //
-    resp.send({});
+
+    const fs = require('fs');
+    const path = require('path');
+
+
+    fs.readdir(directory, (err, files) => {
+        if (err) {
+            // throw err;
+            resp.send({"status": false, "message": err.message});
+        }
+        for (const file of files) {
+            fs.unlink(path.join(directory, file), err => {
+                if (err) {
+                    // throw err;
+                    resp.send({"status": false, "message": err.message});
+
+                }
+            });
+        }
+    });
+
+    resp.send({"status": true});
     // resp.send(`Request rcvd: ${url}`);
 });
+
+
+
 
 
 app.listen(port, () => {
