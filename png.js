@@ -90,7 +90,7 @@ app.get('/png/:domain', async (req, res) => {
             }
         } else {
             domain= 'not'
-            img = 'png/' + domain + '.png';
+            img = 'img/' + domain + '.png';
             download(img, url, res)
         }
     })
