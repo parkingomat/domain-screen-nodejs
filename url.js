@@ -19,10 +19,6 @@ const app = express();
 app.use(cors());
 
 
-//localhost:3000/png/softreck.com
-// http://webscreen.pl:3000/png/softreck.com
-// http://localhost:3000/png/www.phpfunc.com
-
 // Check if exist base64 of domain on image
 //  if not, try to download
 app.get('/url/:url', async (req, res) => {
@@ -39,6 +35,17 @@ app.get('/url/:url', async (req, res) => {
 
     // var url = decodeURI(req.params.url);
     var url = req.params.url;
+
+    var p = path.join(__dirname, img);
+
+    // send a png file if exist
+    const fs = require("fs"); // Or `import fs from "fs";` with ESM
+    if (fs.existsSync(p)) {
+        console.log(`HDD YES: ${url}`);
+        res.sendFile(p);
+        return true;
+    }
+
 
     try {
 
@@ -84,56 +91,6 @@ app.get('/url/:url', async (req, res) => {
 
     // img = 'img/not.png';
     // download(img, url, res);
-})
-
-// http://localhost:3000/png/softreck.com
-// http://localhost:3000/png/softreck.pl
-
-app.get('/png/:domain', async (req, res) => {
-
-    if (!req.params.domain) {
-        throw new Error("domain is required");
-    }
-
-    var domain = req.params.domain;
-    var img = path.join('png', domain + '.png');
-    // var p = path.join(__dirname, 'img', 'not.png');
-
-    var url = `https://${domain}`
-
-    try {
-
-        status(url, function (check) {
-                console.log(check); //true
-                // download(img, url, res) ||
-                // absolute path to the file
-                let p = path.join(__dirname, img);
-
-                const fs = require("fs"); // Or `import fs from "fs";` with ESM
-                if (fs.existsSync(p)) {
-                    // send a png file
-                    res.sendFile(p);
-                    console.log(`HDD YES: ${url}`);
-                    return true;
-                } else {
-                    capture(img, url, res)
-                    return true;
-                }
-            },
-            function (check) {
-                console.log(check); //true
-                download('', url, res);
-                return false;
-            }
-        );
-
-
-    } catch (err) {
-        console.log(":::err.message:");
-        console.log(err.message);
-        download('', url, res);
-        return false;
-    }
 })
 
 /**
