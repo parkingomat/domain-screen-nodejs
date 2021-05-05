@@ -11,14 +11,22 @@ const path = require('path');
 // http://localhost:3000/create/softreck.com
 
 app.get('/create/:domain', async (req, res) => {
-    const browser = await puppeteer.launch()
+
+    const browser = await puppeteer.launch({
+        headless: true,
+        ignoreDefaultArgs: ['--disable-extensions'],
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
+    });
+
     const page = await browser.newPage()
+
+
 // ruleid: express-puppeteer-injection
 //     const url = `https://${req.query.url}`
     const url = `https://${req.params.domain}`
     await page.goto(url)
 
-    var img =  'img/' + req.params.domain + '.png';
+    var img = 'img/' + req.params.domain + '.png';
 
     await page.screenshot({path: img})
     await browser.close()
@@ -36,7 +44,7 @@ app.get('/create/:domain', async (req, res) => {
 
 app.get('/read/:domain', async (req, res) => {
 
-    var img =  'img/' + req.params.domain + '.png';
+    var img = 'img/' + req.params.domain + '.png';
 
     // absolute path to the file
     let p = path.join(__dirname, img);

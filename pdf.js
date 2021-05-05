@@ -22,7 +22,9 @@ app.get("/pdf/:domain", async(req, resp) => {
     console.log(`Rcvd: ${url}`);
 
     const browser = await puppeteer.launch({
-        headless: true
+        headless: true,
+        ignoreDefaultArgs: ['--disable-extensions'],
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
     });
 
     const webPage = await browser.newPage();
