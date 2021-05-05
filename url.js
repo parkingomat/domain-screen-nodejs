@@ -135,7 +135,7 @@ async function capture(img, url, res) {
     ///////////
     const browser = await puppeteer.launch({
         headless: true,
-        // timeout: 0,
+        timeout: 0,
         ignoreHTTPSErrors: true,
         // ignoreDefaultArgs: ['--disable-extensions'],
         args: [
