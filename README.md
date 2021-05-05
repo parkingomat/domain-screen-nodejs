@@ -27,7 +27,7 @@ check version
 ### github
 https://github.com/parkingomat/domain-screen-nodejs.git
 
-    git clone https://github.com/parkingomat/domain-screen-nodejs.git
+    git clone https://github.com/parkingomat/domain-screen-nodejs.git webscreen
     cd domain-screen-nodejs
 
 https://github.com/parkingomat/domain-screen-nodejs
@@ -66,10 +66,14 @@ Install browser
 
 ## Start app
 
+    node server.js
     node serv.js
 
-
     node app.js
+    node png.js
+
+    node pdf.js
+    node .js
 
 
 ## URL
@@ -80,4 +84,6 @@ http://localhost:3000/read/softreck.com
 https://webscreen.pl:3000/create/softreck.com
 
 https://webscreen.pl/create/softreck.com
+https://webscreen.pl/png/softreck.com
+http://webscreen.pl:3000/png/softreck.com
 https://webscreen.plread/softreck.com

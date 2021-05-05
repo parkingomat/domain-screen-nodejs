@@ -6,6 +6,7 @@ const app = express();
 const port = 3000;
 
 //localhost:3000/png/softreck.com
+// http://webscreen.pl:3000/png/softreck.com
 
 app.get("/png/:domain", async(req, resp) => {
 

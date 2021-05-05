@@ -6,9 +6,10 @@ const app = express();
 const port = 3000;
 
 //localhost:3000/pdf/softreck.com
-
+//http://webscreen.pl:3000/pdf/softreck.com
 
 app.get("/pdf/:domain", async(req, resp) => {
+    console.log(req.params);
 
     if (!req.params.domain) {
         throw new Error("domain is required");
