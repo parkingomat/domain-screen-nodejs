@@ -147,13 +147,17 @@ npm uninstall -D puppeteer
 
 http://webscreen.pl:3000/png/*
 
+sh stop.sh
+
+node png.js
+
 ## background
 
     nohup node png.js &
 
 OR
     
-    nohup node index.js >> app.log 2>&1 &
+    nohup node png.js >> png.log 2>&1 &
 
 sudo iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 3000
 

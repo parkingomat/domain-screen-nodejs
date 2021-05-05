@@ -10,6 +10,7 @@ module.exports = function status(url, callback) {
             return callback(res.statusCode === 200);
         })
         .on("error", function(e) {
+            console.log(url, res.statusCode);
             return callback(false);
         });
 }
