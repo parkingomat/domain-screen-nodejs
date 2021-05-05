@@ -17,6 +17,8 @@ const app = express();
 
 app.use(cors());
 
+
+
 //localhost:3000/png/softreck.com
 // http://webscreen.pl:3000/png/softreck.com
 
@@ -33,7 +35,8 @@ app.get("/png/:domain", async(req, resp) => {
     console.log(`Rcvd: ${url}`);
 
     const browser = await puppeteer.launch({
-        headless: true
+        headless: true,
+        ignoreDefaultArgs: ['--disable-extensions'],
     });
 
     const webPage = await browser.newPage();
