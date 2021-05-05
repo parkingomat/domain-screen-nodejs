@@ -64,7 +64,7 @@ app.get("/http/:domain", async (req, resp) => {
 });
 
 process.on('unhandledRejection', function (err) {
-    console.log('unhandledRejection:::');
+    console.log(':::unhandledRejection:');
     console.log(err);
     // sendInTheCalvary(err);
 });
@@ -113,7 +113,7 @@ app.get('/url/:url', async (req, res) => {
         })
 
     } catch (err) {
-        console.log("err.message::::");
+        console.log(":::err.message:");
         console.log(err.message);
         img = 'img/not.png';
         download(img, url, res);
@@ -164,7 +164,7 @@ app.get('/png/:domain', async (req, res) => {
 
 
     } catch (err) {
-        console.log("err.message::::");
+        console.log(":::err.message:");
         console.log(err.message);
         img = 'img/not.png';
         download(img, url, res);
