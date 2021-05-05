@@ -114,8 +114,8 @@ app.get('/url/:url', async (req, res) => {
             }
         );
 
-        img = 'img/not.png';
-        download(img, url, res);
+        // img = 'img/not.png';
+        // download(img, url, res);
 
     } catch (err) {
         console.log(":::err.message:");
@@ -125,8 +125,8 @@ app.get('/url/:url', async (req, res) => {
         return false;
     }
 
-    img = 'img/not.png';
-    download(img, url, res);
+    // img = 'img/not.png';
+    // download(img, url, res);
 })
 
 // http://localhost:3000/png/softreck.com
