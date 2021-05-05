@@ -34,6 +34,12 @@ https://github.com/parkingomat/domain-screen-nodejs.git
 
 https://github.com/parkingomat/domain-screen-nodejs
 
+
+### git update
+
+    git stash
+    git pull --rebase
+
 ## NODEJS Install 
 
 Install the latest version of Node Js
@@ -136,4 +142,20 @@ If the package was a development dependency, listed in the devDependencies of th
 
 npm uninstall -S puppeteer
 npm uninstall -D puppeteer
+
+---
+
+http://webscreen.pl:3000/png/*
+
+## background
+
+    nohup node png.js &
+
+OR
+    
+    nohup node index.js >> app.log 2>&1 &
+
+sudo iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 3000
+
+
 
