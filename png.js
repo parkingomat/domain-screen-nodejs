@@ -82,30 +82,25 @@ app.get('/png/:domain', async (req, res) => {
     status(url, function (check) {
         console.log(check); //true
         if (check) {
-            if (download(img, url, res)) {
-                return true;
-            } else {
-                capture(img, url, res)
-                return true;
-            }
+            download(img, url, res) || capture(img, url, res)
         } else {
-            domain= 'not'
+            domain = 'not'
             img = 'img/' + domain + '.png';
             download(img, url, res)
         }
     })
 
 
-/*
-    try {
+    /*
+        try {
 
 
-} catch (err) {
-    return res.status(500).json({
-        success: false,
-        error_message: err.message,
-    });
-}*/
+    } catch (err) {
+        return res.status(500).json({
+            success: false,
+            error_message: err.message,
+        });
+    }*/
 
 
 })
