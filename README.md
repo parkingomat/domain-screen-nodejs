@@ -123,3 +123,14 @@ check
     reboot
 
     hostname –f
+
+
+## remove
+
+Using the -S flag, or --save, this operation will also remove the reference in the package.json file.
+
+If the package was a development dependency, listed in the devDependencies of the package.json file, you must use the -D / --save-dev flag to remove it from the file:
+
+npm uninstall -S puppeteer
+npm uninstall -D puppeteer
+
