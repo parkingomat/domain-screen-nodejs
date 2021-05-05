@@ -87,3 +87,31 @@ https://webscreen.pl/create/softreck.com
 https://webscreen.pl/png/softreck.com
 http://webscreen.pl:3000/png/softreck.com
 https://webscreen.plread/softreck.com
+
+
+DOMAIN
+sudo hostnamectl set-hostname webscreen
+
+hostnamectl set-hostname webscreen
+hostnamectl status
+
+hostname webscreen
+
+Open your hosts file.
+
+    sudo nano /etc/hosts
+
+put line
+
+    123.123.123.123	web1.gridscale.io web1
+
+make sure to add the below code just before the ipv6 tables, 
+and use the tab key to separate the localhost ip address(127.0.0.1) and the domain name
+(*.com).
+
+
+check
+
+    reboot
+
+    hostname –f

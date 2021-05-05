@@ -1,9 +1,21 @@
 // CodeSnippets/Documents/Websites/NodeJs/createPdfServer.js
-
+// TODO: sqlite
+const cors = require("cors");
 const express = require("express");
 const puppeteer = require("puppeteer");
-const app = express();
+// const path = require('path');
+
+// Globals
 const port = 3000;
+var browser;
+
+// Initializing Express and Puppeteer Browser
+
+const app = express();
+
+// Middleware
+
+app.use(cors());
 
 //localhost:3000/png/softreck.com
 // http://webscreen.pl:3000/png/softreck.com
@@ -42,6 +54,7 @@ app.get("/png/:domain", async(req, resp) => {
     // resp.send(`Request rcvd: ${url}`);
 });
 
+
 app.listen(port, () => {
-    console.log(`Server started @: http://localhost:${port}`)
+    console.log(`Server started on port ${port}`)
 })
