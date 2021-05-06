@@ -97,7 +97,7 @@ app.get('/url/:url', async (req, res) => {
             },
             function (check) {
                 console.log(check); //true
-                if (check == 'ERR_TLS_CERT_ALTNAME_INVALID') {
+                if (check == 'ERR_TLS_CERT_ALTNAME_INVALID' || check == 'ERR_TOO_MANY_REDIRECTS') {
                     capture(img, url, res)
                     return true;
                 }
@@ -298,6 +298,7 @@ app.get("/remove/:dir", async (req, resp) => {
     // resp.send(`Request rcvd: ${url}`);
 });
 
+// ERR_TOO_MANY_REDIRECTS
 
 process.on('unhandledRejection', function (err) {
     console.log(':::unhandledRejection:');
