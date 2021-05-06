@@ -31,6 +31,18 @@ app.use(cors());
 // http://localhost:3000/url/https%3A%2F%2Fznajdztermin.pl
 // http://localhost:3000/url/https%3A%2F%2Fplanemerytalny.pl%0D
 
+function getPathByUrl(url, extension = 'png') {
+
+    // Buffer.from("SGVsbG8gV29ybGQ=", 'base64').toString('ascii')
+    const urld = Buffer.from(url).toString('base64');
+    // console.log(urld);
+
+    var img = path.join(extension, urld + '.' + extension);
+
+    var p = path.join(__dirname, img);
+
+    return p;
+}
 
 // Check if exist base64 of domain on image
 //  if not, try to download
@@ -40,16 +52,18 @@ app.get('/url/:url', async (req, res) => {
         throw new Error("domain is required");
     }
 
+    var url = req.params.url;
+
     // Buffer.from("SGVsbG8gV29ybGQ=", 'base64').toString('ascii')
-    const urld = Buffer.from(req.params.url).toString('base64');
+    const urld = Buffer.from(url).toString('base64');
     // console.log(urld);
 
     var img = path.join('png', urld + '.png');
 
-    // var url = decodeURI(req.params.url);
-    var url = req.params.url;
-
     var p = path.join(__dirname, img);
+
+    // var url = decodeURI(req.params.url);
+
 
     // send a png file if exist
     const fs = require("fs"); // Or `import fs from "fs";` with ESM
@@ -82,7 +96,7 @@ app.get('/url/:url', async (req, res) => {
             },
             function (check) {
                 console.log(check); //true
-                if(check == 'ERR_TLS_CERT_ALTNAME_INVALID') {
+                if (check == 'ERR_TLS_CERT_ALTNAME_INVALID') {
                     capture(img, url, res)
                     return true;
                 }
@@ -144,6 +158,7 @@ function download(img, url, res) {
  */
 async function capture(img, url, res) {
 // if(capture(img, url, res)){
+    const fs = require("fs"); // Or `import fs from "fs";` with ESM
 
     ///////////
     const browser = await puppeteer.launch({
@@ -178,17 +193,19 @@ async function capture(img, url, res) {
         // url = chain[1].url();
         // console.log("url", url); // Return string 'http://example.com'
 
-        let p = path.join(__dirname, img);
-        // console.log("p  redirected: ", p); // Return string 'http://example.com'
-        // let p = img;
+        let path_png = path.join(__dirname, img);
+        // console.log("path_png  redirected: ", path_png); // Return string 'http://example.com'
+        let path_txt = getPathByUrl(url, 'txt');
 
-        const fs = require("fs"); // Or `import fs from "fs";` with ESM
-        if (fs.existsSync(p)) {
+        console.log(path_txt);
+
+        if (fs.existsSync(path_png)) {
             // send a png file
-            res.sendFile(p);
+            res.sendFile(path_png);
             console.log(`HDD YES: ${url}`);
-        } else {
-            capture(img, url, res)
+        } else if (!fs.existsSync(path_txt)) {
+            createTXT(url);
+            capture(img, url, res);
         }
 
         // capture(img, url, res);
@@ -216,11 +233,39 @@ async function capture(img, url, res) {
     return true;
 }
 
+function createTXT(url) {
 
-app.get("/remove", async (req, resp) => {
+    let path = getPathByUrl(url, 'txt');
 
-    console.log('remove cache');
-    const directory = 'png';
+    const fs = require("fs"); // Or `import fs from "fs";` with ESM
+
+    // let p = path.join(__dirname, 'txt', filename);
+
+    // fs.writeFile(path, url, function (err) {
+    //     if (err) {
+    //         return false;
+    //         return console.log(err);
+    //     }
+    //     console.log("The file was saved!");
+    // });
+
+// Or
+    return fs.writeFileSync(path, url);
+}
+
+// http://localhost:3000/remove/png
+// http://localhost:3000/remove/txt
+
+app.get("/remove/:dir", async (req, resp) => {
+
+
+    if (!req.params.dir) {
+        // throw new Error("dir is required");
+        resp.send({"status": false, "message": "dir is required"});
+    }
+
+    const directory = req.params.dir;
+    console.log('remove cache on ', directory);
 
 
     const fs = require('fs');
