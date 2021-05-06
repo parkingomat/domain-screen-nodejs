@@ -27,8 +27,9 @@ app.use(cors());
 // sprawdzanie najpierw w bazie danych
 // realizacja limitow
 // logi serwera i domen
-
+//www.sending24.com/mailbox
 // http://localhost:3000/url/https%3A%2F%2Fznajdztermin.pl
+// http://localhost:3000/url/https%3A%2F%2Fwww.sending24.com
 // http://localhost:3000/url/https%3A%2F%2Fplanemerytalny.pl%0D
 
 function getPathByUrl(url, extension = 'png') {
@@ -204,8 +205,13 @@ async function capture(img, url, res) {
             res.sendFile(path_png);
             console.log(`HDD YES: ${url}`);
         } else if (!fs.existsSync(path_txt)) {
+            // create TXT to know, that was checked, and no make more redirection, even there are more than 1
             createTXT(url);
             capture(img, url, res);
+        } else {
+            // res.sendFile(path_png);
+            // console.log(`HDD YES: ${url}`);
+            download(img, url, res);
         }
 
         // capture(img, url, res);
