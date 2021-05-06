@@ -27,12 +27,14 @@ check version
 
 
 ### github
+https://github.com/parkingomat/domain-screen-nodejs
 https://github.com/parkingomat/domain-screen-nodejs.git
 
     git clone https://github.com/parkingomat/domain-screen-nodejs.git webscreen
     cd domain-screen-nodejs
+    cd webscreen
 
-https://github.com/parkingomat/domain-screen-nodejs
+
 
 
 ### git update
@@ -64,6 +66,7 @@ To use Puppeteer in your project, run:
 
     npm i puppeteer-core
 
+## BROWSER
 
 After the Nodejs installation, we need to create a new project folder and install Puppeteer, which comes with a recent version of Chromium. We can run the following command to install Puppeteer.
 
@@ -101,18 +104,17 @@ https://webscreen.pl/png/softreck.com
 http://webscreen.pl:3000/png/softreck.com
 https://webscreen.plread/softreck.com
 
-## BROWSER
 
-    apt-get install chromium-browser
 
 ## DOMAIN
 
-sudo hostnamectl set-hostname webscreen
+    sudo hostnamectl set-hostname webscreen
 
-hostnamectl set-hostname webscreen
-hostnamectl status
+    hostnamectl set-hostname webscreen
+    hostnamectl status
 
-hostname webscreen
+    hostname webscreen
+
 
 Open your hosts file.
 
@@ -140,16 +142,21 @@ Using the -S flag, or --save, this operation will also remove the reference in t
 
 If the package was a development dependency, listed in the devDependencies of the package.json file, you must use the -D / --save-dev flag to remove it from the file:
 
-npm uninstall -S puppeteer
-npm uninstall -D puppeteer
+    npm uninstall -S puppeteer
+    npm uninstall -D puppeteer
 
 ---
 
 http://webscreen.pl:3000/png/*
 
-sh stop.sh
+    sh status.sh
 
-node png.js
+    sh stop.sh
+
+## START
+
+    node url.js
+
 
 ## background
 
@@ -161,7 +168,14 @@ OR
     
     nohup node url.js >> url.log 2>&1 &
 
+
+## PORT 80
+
 sudo iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 3000
 
 
+## LINUX 
 
+    apt list --upgradable -a
+
+    apt upgrade -y chromium-browser

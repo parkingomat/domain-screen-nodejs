@@ -18,6 +18,19 @@ const app = express();
 
 app.use(cors());
 
+// uruchomic na wydajnym serwerze contabo
+// zrobic restart uslugi co godzine
+// kasowac dane po 7 dniach
+// dane w bazie sql
+// kolejkowanie zapytan
+// informacja o oczekiwaniu na realizacje w animacji gif - 1 minuta -+ 10 minut
+// sprawdzanie najpierw w bazie danych
+// realizacja limitow
+// logi serwera i domen
+
+// http://localhost:3000/url/https%3A%2F%2Fznajdztermin.pl
+// http://localhost:3000/url/https%3A%2F%2Fplanemerytalny.pl%0D
+
 
 // Check if exist base64 of domain on image
 //  if not, try to download

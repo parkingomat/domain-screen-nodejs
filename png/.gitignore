@@ -1,5 +1,5 @@
 .idea/
-png/*
+png/
 package-lock.json
 # Logs
 logs
