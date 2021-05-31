@@ -6,6 +6,59 @@ Nodejs version for screen shooting
 http://domain-screen-nodejs.parkingomat.pl/
 http://webscreen.pl:3000/png/softreck.com
 
+### TODO
+
+#### Projects
+
++ NODEJS
+  win.nodejs.bashfunc.com
+  linux.
+
+letserv
+
+https://github.com/nodejsfunc
++ nodejsfunc/server
+  
++ CRON
++ QUEUE sqlite
+
+#### Config
+
+##### ENV - apicra
+apicra chat pomoze w instalacji srodowiska do kazdego projektu
+skanuje aktualne pliki i pyta co zrobic
+w kontekscie konfiguracji package. / composer.
+
+pytania?
+    
+
++ nodejsfunc/server
+
++ QUEUE sqlite
+
++ NODEJS
+    env update
+
++ CRON
+    restart service each day
+
+##### APP
+each
+    0:01
+
+LOGS
+    logs each day
+
+logs/2021-05-21/url.log
+
+EMAIL
+
+ALERT
+    + pobierz email i zrob codzienne/tygodniowe alerty
+
+
+devalert.pl
+
 
 ### GIT Install
 
